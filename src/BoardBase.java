@@ -47,7 +47,11 @@ public class BoardBase {
      * call the reset method
      * */
     public BoardBase() {
-        
+      board = new char[ROWS][COLUMNS];
+      moveNumbers = new int[ROWS][COLUMNS];
+      firstAvailableRow = new int[ROWS];
+      winningCells = new Cell[4];
+      reset();
         
         
     }
@@ -60,7 +64,21 @@ public class BoardBase {
      * set moveNumber to 1
      * */
     public void reset() {
-
+      for(int i = 0; i<board.length; i++){
+        for(int col = 0; col<COLUMNS; col++){
+          board[i][col] = UNMARKED;
+          moveNumbers[i][col] = 0; 
+        }
+      }
+      for(int row = 0; row< firstAvailableRow.length; row++){
+        firstAvailableRow[row] = ROWS -1;
+      }
+      for(int j = 0; j< winningCells.length; j++){
+        winningCells[j] = new Cell(0,0);
+      }
+      winnerFound = false;
+    
+      
         
         
         
@@ -75,6 +93,14 @@ public class BoardBase {
      *  return the new copy
      * */
     public char[][] getGrid() {
+      char [] [] saved = new char[ board.length] [board[0].length];
+      for(int i= 0; i<ROWS; i++){
+        for(int x = 0; x<COLUMNS; x++){
+          saved[i][x] = board [ i] [x];
+        }
+      }
+      return saved;
+                                                     
 
         
         
